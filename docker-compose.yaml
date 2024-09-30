@@ -1,0 +1,18 @@
+services:
+    db:
+        image: postgres:16
+        volumes:
+            - ./data/postgres:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        restart: unless-stopped
+        environment:
+            - POSTGRES_PASSWORD=pass
+            - POSTGRES_USER=user
+            - POSTGRES_DB=surveydb
+    survey-service:
+        build: ./TestTaskSurveys
+        ports:
+            - "5000:8080"
+        restart: unless-stopped
+
